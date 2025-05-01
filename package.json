@@ -1,0 +1,26 @@
+{
+  "name": "framers-pocket",
+  "version": "1.0.0",
+  "description": "This application will provide API endpoints to manage the profit and expense of the farmer ",
+  "keywords": [
+    "Farmer's",
+    "Pocket"
+  ],
+  "license": "ISC",
+  "author": "Siva K",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "framers-pocket": "file:",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.0",
+    "nodemon": "^3.1.10"
+  }
+}
