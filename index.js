@@ -10,13 +10,12 @@ require("dotenv").config();
 
 //Connection to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, {})
-  .then(() => {
-    console.log("Connectd to MongoDB server");
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
-  .catch((error) => {
-    console.log("Error connection to the mongoDB", error);
-  });
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log("Error: ", err));
 
 // Middleware
 app.use(cors({ origin: "*", methods: "GET,POST,PUT,DELETE" }));
