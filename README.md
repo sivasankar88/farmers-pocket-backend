@@ -29,6 +29,6 @@ This is the backend API for the Farmer Expense Management System. It provides al
 ### Installation
 
 bash
-git clone https://github.com/sivasankar88/farmesr-s-pocket-backend.git
+git clone https://github.com/sivasankar88/farmers-pocket-backend.git
 cd farmesr-s-pocket-backend
 npm install
