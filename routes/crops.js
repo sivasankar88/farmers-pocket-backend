@@ -9,11 +9,14 @@ router.use(authenticate);
 router.get("/", async (req, res) => {
   try {
     const userId = req.user.id;
-    const { fromDate, toDate } = req.query;
+    const { fromDate, toDate, cropId } = req.query;
     const query = { userId: userId };
-    // query.date = {};
-    // if (fromDate) query.date.$gte = new Date(fromDate);
-    // if (toDate) query.date.$lte = new Date(toDate);
+    if (cropId) query._id = cropId;
+    if (fromDate || toDate) {
+      query.date = {};
+      if (fromDate) query.date.$gte = new Date(fromDate);
+      if (toDate) query.date.$lte = new Date(toDate);
+    }
     const crops = await Crop.find(query);
     const cropsWithProfit = await Promise.all(
       crops.map(async (crop) => {
@@ -51,9 +54,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { name, acres, date } = req.body;
-    console.log(req.body);
     const userId = req.user.id;
-    console.log(userId);
     const crop = new Crop({
       userId: userId,
       name: name,

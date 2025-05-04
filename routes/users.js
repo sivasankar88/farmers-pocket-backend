@@ -26,7 +26,6 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  console.log(req.body);
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -38,12 +37,10 @@ router.post("/login", async (req, res) => {
     if (password !== user.password) {
       return res.status(400).json({ message: "Invalid password" });
     }
-    console.log(user);
     const payload = {
       id: user._id,
       email: user.email,
     };
-    console.log(payload);
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });

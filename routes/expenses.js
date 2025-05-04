@@ -50,7 +50,6 @@ router.post("/", async (req, res) => {
       amount,
       notes,
     });
-    console.log(expense);
     await expense.save();
     res.status(201).json({ message: "expense saved" });
   } catch (error) {
