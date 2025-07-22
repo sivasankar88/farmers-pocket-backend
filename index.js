@@ -17,7 +17,6 @@ mongoose
 // Middleware
 app.use(cors({ origin: "*", methods: "GET,POST,PUT,DELETE" }));
 app.use(express.json());
-//app.use(console.log("called"));
 // Routes
 app.use("/api/crops", cropRoutes);
 app.use("/api/expenses", expenseRoutes);
