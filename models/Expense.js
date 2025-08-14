@@ -16,7 +16,7 @@ const ExpenseSchema = new mongoose.Schema({
       "pesticide",
       "irrigation",
       "harvesting",
-      "labor",
+      "labour",
       "others",
     ],
   },

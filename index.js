@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger");
 const cors = require("cors");
 const app = express();
 const cropRoutes = require("./routes/crops.js");
@@ -17,6 +19,8 @@ mongoose
 // Middleware
 app.use(cors({ origin: "*", methods: "GET,POST,PUT,DELETE" }));
 app.use(express.json());
+//Swagger route
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Routes
 app.use("/api/crops", cropRoutes);
 app.use("/api/expenses", expenseRoutes);
@@ -25,4 +29,7 @@ app.use("/api/user", userRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Application is runnig on the port ${process.env.PORT}`);
+  console.log(
+    `Swagger Docs is runnig on the port ${process.env.PORT}/api-docs`
+  );
 });
