@@ -21,6 +21,8 @@ const allowedOrigins = [process.env.ALLOWED_ORIGIN];
 app.use(
   cors({
     origin: function (origin, callback) {
+      console.log("Request origin - ", origin);
+      console.log("Allowed origin", allowedOrigins);
       if (!origin) return callback(null, true); // Allow Postman
       if (allowedOrigins.includes(origin)) {
         callback(null, true);

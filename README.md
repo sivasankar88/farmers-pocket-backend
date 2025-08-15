@@ -4,6 +4,17 @@ This is the backend API for the **Farmer Expense Management System**. It provide
 
 ---
 
+## 📚 API Documentation
+
+The backend API is fully documented with Swagger.
+
+You can explore the available endpoints here:  
+➡️ **[Swagger UI - Farmer's Pocket API](https://farmesr-s-pocket-backend.onrender.com/api-docs/#/)**
+
+---
+
+---
+
 ## ✨ Features
 
 - 🔐 User registration and login with JWT authentication
@@ -38,3 +49,4 @@ This is the backend API for the **Farmer Expense Management System**. It provide
 git clone https://github.com/sivasankar88/farmers-pocket-backend.git
 cd farmers-pocket-backend
 npm install
+```
