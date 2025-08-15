@@ -17,7 +17,20 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Middleware
-app.use(cors({ origin: "*", methods: "GET,POST,PUT,DELETE" }));
+const allowedOrigins = [process.env.ALLOWED_ORIGIN];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // Allow Postman
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: "GET,POST,PUT,DELETE",
+  })
+);
 app.use(express.json());
 //Swagger route
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));

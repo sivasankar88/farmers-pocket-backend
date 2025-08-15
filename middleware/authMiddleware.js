@@ -16,7 +16,7 @@ const authenticate = (req, res, next) => {
     req.user = decode;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Invalid token access1" });
+    return res.status(401).json({ message: "Invalid token access" });
   }
 };
 module.exports = authenticate;
