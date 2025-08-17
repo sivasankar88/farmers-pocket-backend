@@ -78,15 +78,23 @@ router.use(authenticate);
 router.get("/", async (req, res) => {
   try {
     const userId = req.user.id;
-    const { fromDate, toDate, cropId } = req.query;
+    const { fromDate, toDate, cropId, pageNumber = 1 } = req.query;
     const query = { userId: userId };
+    const limit = 5;
     if (cropId) query._id = cropId;
     if (fromDate || toDate) {
       query.date = {};
       if (fromDate) query.date.$gte = new Date(fromDate);
       if (toDate) query.date.$lte = new Date(toDate);
     }
-    const crops = await Crop.find(query);
+
+    // get total crops for pagination
+    const totalRecords = await Crop.countDocuments(query);
+    const totalPages = Math.ceil(totalRecords / limit);
+
+    const crops = await Crop.find(query)
+      .skip((pageNumber - 1) * limit)
+      .limit(limit);
     const cropsWithProfit = await Promise.all(
       crops.map(async (crop) => {
         const expenses = await Expense.find({ cropId: crop._id });
@@ -113,7 +121,12 @@ router.get("/", async (req, res) => {
       })
     );
 
-    return res.status(200).json(cropsWithProfit);
+    return res.status(200).json({
+      currentPage: Number(pageNumber),
+      totalPages,
+      totalRecords,
+      data: cropsWithProfit,
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "server error." });
